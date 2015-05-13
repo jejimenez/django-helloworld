@@ -1,5 +1,5 @@
 pip install pytz django-crispy-forms
-
+pip install psycopg2
 
 {
 sudo -u postgres psql

@@ -1,0 +1,8 @@
+pip install pytz django-crispy-forms
+
+
+{
+sudo -u postgres psql
+create database marcador
+create user jejimenez with password 'desarroll0'
+}

@@ -1,0 +1,6 @@
+
+#sudo easy_install django-tastypie
+
+pip install -e git+https://github.com/django-tastypie/django-tastypie#egg=TastyPie
+
+pip install django-angular

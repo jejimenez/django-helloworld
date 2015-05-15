@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from djangular.forms import NgModelFormMixin#NgFormValidationMixin, NgModelFormMixin, AddPlaceholderFormMixin
 
 
-class JobForm(NgModelFormMixin, ModelForm):
+class JobForm(ModelForm):
     """
     Job Form with a little crispy forms added! 
     """

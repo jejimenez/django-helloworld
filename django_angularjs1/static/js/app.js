@@ -41,7 +41,7 @@ function ($scope, Restangular, CbgenRestangular, $q) {
                     ))
                 }
 
-}])// end controller
+}]);// end controller
 
 app.factory('CbgenRestangular', function (Restangular) {
         return Restangular.withConfig(function (RestangularConfigurer) {
@@ -50,7 +50,6 @@ app.factory('CbgenRestangular', function (Restangular) {
     });
 
 populate_scope_values = function ($scope) {
-    alert($scope.name);
     return {name: $scope.name, description: $scope.description };
 };
 

@@ -11,6 +11,10 @@ class JobForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(JobForm, self).__init__(*args, **kwargs)
         setup_bootstrap_helpers(self)
+        for field in self:
+            field.field.widget.attrs.update({'ng-focus': ''})
+            field.field.widget.attrs.update({'ng-model': format(field.name),'get-error-elements': '',
+        })
 
     class Meta:
         model = Job

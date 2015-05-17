@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf.urls import include, url
 from django.contrib import admin
 from tastypie.api import Api
-from api import JobResource
+from .api import JobResource
 from .views import JobFormView, JobView
 
 

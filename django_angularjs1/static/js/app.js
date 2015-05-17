@@ -30,6 +30,7 @@ function ($scope, Restangular, CbgenRestangular, $q) {
       $q.when(post_update_data.then(
                         function (object) {
                             // success!
+                            console.log(object)
                         },
 
                         function (object){
@@ -49,6 +50,7 @@ app.factory('CbgenRestangular', function (Restangular) {
     });
 
 populate_scope_values = function ($scope) {
+    alert($scope.name);
     return {name: $scope.name, description: $scope.description };
 };
 

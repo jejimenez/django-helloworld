@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="thinkster">
+<html ng-app="pooling">
 <head>
-  <title>thinkster-django-angular-boilerplate</title>
+  <title>pooling</title>
 
   <base href="/" />
 
@@ -11,11 +11,20 @@
 <body>
   {% include 'navbar.html' %}
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 ng-view"></div>
-    </div>
-  </div>
+
+
+
+    <main class="ui page grid">
+        <div class="row">
+            <div class="column ng-view">
+                <div class="ui message main">
+                    <h1 class="ui header">Hello, world!</h1>
+                    	<div id="map-canvas"></div>
+                    <a class="ui blue button">Learn more »</a>
+                </div>
+            </div>
+        </div>
+    </main>
 
   {% include 'javascripts.html' %}
 </body>

@@ -6,7 +6,7 @@
 
 //start page properties
   $('.ui.dropdown').dropdown();
-
+/*
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var map;
@@ -23,7 +23,7 @@ function initialize() {
 
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
+*/
 
 //
   angular

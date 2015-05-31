@@ -1,6 +1,40 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html ng-app="pooling">
 <head>
+    <script type="text/javascript" src="{% static 'bower_components/modernizr/modernizr.js' %}"></script>
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: ['Open+Sans:latin'] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+
+
+    </script>
+
+    <style type="text/css">
+        .wf-loading * {
+            opacity: 0;
+        }
+
+        .wf-loading {
+            background: url("{% static 'img/ajax-loader.gif' %}") no-repeat center center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .wf-active *,
+        .wf-inactive * {
+        }
+    </style>
   <title>pooling</title>
 
   <base href="/" />
@@ -18,9 +52,10 @@
         <div class="row">
             <div class="column ng-view">
                 <div class="ui message main">
-                    <h1 class="ui header">Hello, world!</h1>
-                    	<div id="map-canvas" ng-init="initMap()" ></div>
+                      <h2>Hello, world!</h2>
+                      <g-map idmap="map_canvas"  ></g-map>
                     <a class="ui blue button">Learn more »</a>
+                    <i class="large home icon"></i>
                 </div>
             </div>
         </div>

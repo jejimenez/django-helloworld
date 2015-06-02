@@ -9,3 +9,18 @@ h1, h2, h3, h4, h5
 {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
+
+#map_wrapper #btn_save_markers
+{
+  z-index: 10;
+  position: absolute;
+  top: 10px;
+  right: 50%;
+  display: block;
+}
+#map_wrapper
+{
+  position: relative;
+  top: 0px;
+  right: 0px;
+}

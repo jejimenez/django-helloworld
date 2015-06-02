@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html ng-app="pooling">
+<html>
 <head>
     <script type="text/javascript" src="{% static 'bower_components/modernizr/modernizr.js' %}"></script>
     <script type="text/javascript">
@@ -42,25 +42,30 @@
   {% include 'stylesheets.html' %}
 </head>
 
-<body ng-controller="GoMapsController">>
+<body ng-app="pooling">
+<div ng-controller="GoMapsController">
   {% include 'navbar.html' %}
+  <br>
+  <br>
+  <br>
 
 
-
-
+    <p>Name: <input type="text" ng-model="name"></p>
+    <p>{{name}}</p>
+                    <i class="large home icon" data-ng-click='setDirections()' ></i>
+        <button class="btn btn-info" data-ng-click='setDirections()'><i class="icon-search"></i>Get Directions</button>
     <main class="ui page grid">
         <div class="row">
             <div class="column ng-view">
                 <div class="ui message main">
-                      <h2>Hello, world!</h2>
-                      <g-map idmap="map_canvas"  ></g-map>
-                    <a class="ui blue button">Learn more »</a>
-                    <i class="large home icon"></i>
+                    <h2>Hello, world!</h2>
+                    <g-map idmap="map_canvas"></g-map>
                 </div>
             </div>
         </div>
     </main>
 
+</div>
   {% include 'javascripts.html' %}
 </body>
 </html>

@@ -18,15 +18,12 @@ angular.module('pooling.maps.directives', [])
         img_start_rt = 'http://maps.google.com/mapfiles/kml/paddle/go.png',
         img_end_rt = 'http://maps.google.com/mapfiles/kml/paddle/ylw-square.png',
         str_start_rt = 'Inicio de ruta',
-        str_end_rt = 'Fin de ruta'/*,
-        goldStarSVG = {
-            path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-            fillColor: 'yellow',
-            fillOpacity: 0.8,
-            scale: 0.1,
-            strokeColor: 'gold',
-            strokeWeight: 3
-          }*/;
+        str_end_rt = 'Fin de ruta',
+        msg_marker_added_start = 'Marcador agregado:Inicio de ruta',
+        msg_marker_added_end = 'Marcador agregado:Fin de ruta',
+        strPlnTypeStart = 'start',
+        strPlnTypeEnd = 'end';
+
 
         return {
             restrict: 'E',
@@ -35,14 +32,17 @@ angular.module('pooling.maps.directives', [])
             scope: {idmap: '@'},
             templateUrl: 'static/templates/maps/gmap.html',
             link: function (scope, element, attrs, controller) {
+                //scope.gmap.setDirections = function () {log("okkkkkkkkkkkkkkkk")};
+                //scope.gmap.options = ['Driving', 'Walking', 'Bicycling', 'Transit'];
                 var model = scope.gmap;
-                console.log(scope);
                 if ($window.google && $window.google.maps) {
                     gMapInit();
                 } else {
-                    injectGoogle();
+                    injectGoogle(function(){});
                 };
+                function log(str){toastr["success"](str);}
                 function gMapInit() {
+                   //log('maps-API has been loaded, ready to use');
                    var 
                     directionsDisplay = new google.maps.DirectionsRenderer({
                         draggable: true
@@ -58,6 +58,10 @@ angular.module('pooling.maps.directives', [])
                     directionsDisplay.setMap(map);
                     google.maps.event.addListener(map, 'click', function(event) {
                        placeMarker(event.latLng);
+                    });
+
+                    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+                        log("Mapa cargado!");
                     });
 
                     // Try HTML5 geolocation
@@ -77,8 +81,26 @@ angular.module('pooling.maps.directives', [])
                     * place the markers. Just two markers, start rout and end rout.
                     **/
                     function placeMarker(location) {
+                        //for inheritance
+                        function inherits(childCtor, parentCtor) {
+                           /** @constructor */
+                           function tempCtor() {};
+                           tempCtor.prototype = parentCtor.prototype;
+                           childCtor.superClass_ = parentCtor.prototype;
+                           childCtor.prototype = new tempCtor();
+                           childCtor.prototype.constructor = childCtor;
+                        };
+                        //inherit from google.maps.Marker
+                        function google_maps_Marker_Seeker(domElem, options){
+                           google.maps.Marker.call(this, domElem, options);
+                           var pln_type = '';
+                           this.getPlnType = function(){ return pln_type };
+                           this.setPlnType = function(val){ this.pln_type = val };
+                        }
+ 
+                        inherits(google_maps_Marker_Seeker, google.maps.Marker);
                         var 
-                            marker = new google.maps.Marker({
+                            marker = new google_maps_Marker_Seeker({
                                 position: location, 
                                 map: map,
                                 animation: google.maps.Animation.DROP,
@@ -87,20 +109,25 @@ angular.module('pooling.maps.directives', [])
                             });
                         if(markers.length >= 1 ){
                             marker.setIcon(img_end_rt);
-                            marker.setTitle(str_start_rt);   
+                            marker.setTitle(str_end_rt);
+                            marker.setPlnType(strPlnTypeEnd);
                             if(markers.length > 1){
                                 markers[1].setMap(null);
                                 markers.splice(1);
                             }
+                            toastr["info"](msg_marker_added_end);
                         }
                         else{
-                            marker.setTitle(str_end_rt);
+                            marker.setTitle(str_start_rt);
                             marker.setIcon(img_start_rt);
+                            marker.setPlnType(strPlnTypeStart);
+                            toastr["info"](msg_marker_added_start);
                         }
                         markers.push(marker);
+                        scope.gmap.markers = markers;
                     }
                 };
-                function injectGoogle() {
+                function injectGoogle(callback) {
                     var cbId = prefix + ++counter;
                     $window[cbId] = gMapInit;
                     var wf = document.createElement('script');
@@ -108,13 +135,13 @@ angular.module('pooling.maps.directives', [])
                     '://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=' + cbId;
                     wf.type = 'text/javascript';
                     wf.async = 'true';
+                    if(callback)wf.onload=callback;
                     var s = document.getElementsByTagName('script')[0];
                     s.parentNode.insertBefore(wf, s);
-
-                    toastr["success"]("Mapa cargado");
                 };
             }
         }
     }
 
 })();
+

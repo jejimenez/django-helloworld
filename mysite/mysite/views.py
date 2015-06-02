@@ -3,9 +3,9 @@ from django.views.generic.base import TemplateView
 from django.utils.decorators import method_decorator
 
 
-class IndexView(TemplateView):
+class IndexPoolingView(TemplateView):
     template_name = 'index.html'
 
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
-        return super(IndexView, self).dispatch(*args, **kwargs)
+        return super(IndexPoolingView, self).dispatch(*args, **kwargs)

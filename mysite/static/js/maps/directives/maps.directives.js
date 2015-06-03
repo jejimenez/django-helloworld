@@ -82,8 +82,7 @@ angular.module('pooling.maps.directives', [])
                     **/
                     function placeMarker(location) {
                         //for inheritance
-                        function inherits(childCtor, parentCtor) {
-                           /** @constructor */
+                        /*function inherits(childCtor, parentCtor) {
                            function tempCtor() {};
                            tempCtor.prototype = parentCtor.prototype;
                            childCtor.superClass_ = parentCtor.prototype;
@@ -98,7 +97,15 @@ angular.module('pooling.maps.directives', [])
                            this.setPlnType = function(val){ this.pln_type = val };
                         }
  
-                        inherits(google_maps_Marker_Seeker, google.maps.Marker);
+                        inherits(google_maps_Marker_Seeker, google.maps.Marker);*/
+                        // Object inherit google maps marker
+                        function google_maps_Marker_Seeker(options) {
+                            google.maps.Marker.call( this, options );
+                            this.pln_type = options.pln_type;
+                        }
+                        // setting up the inheritance
+                        google_maps_Marker_Seeker.prototype = Object.create( google.maps.Marker.prototype );
+                        google_maps_Marker_Seeker.prototype.setPlnType = function (pln_type) {this.pln_type = pln_type};
                         var 
                             marker = new google_maps_Marker_Seeker({
                                 position: location, 
@@ -107,16 +114,18 @@ angular.module('pooling.maps.directives', [])
                                 draggable:true                                
                                 //icon: 'http://maps.google.com/mapfiles/kml/paddle/go.png',
                             });
+                        // If it's not the first mark, must be the second. (Just two markers allowed)
                         if(markers.length >= 1 ){
                             marker.setIcon(img_end_rt);
                             marker.setTitle(str_end_rt);
                             marker.setPlnType(strPlnTypeEnd);
+                            //If there is already a second marker, it's deleted
                             if(markers.length > 1){
                                 markers[1].setMap(null);
                                 markers.splice(1);
                             }
                             toastr["info"](msg_marker_added_end);
-                        }
+                        }//If it's the first marker
                         else{
                             marker.setTitle(str_start_rt);
                             marker.setIcon(img_start_rt);

@@ -33,12 +33,13 @@
     function setMarkersSeeker(markers) {
       console.log(markers);
       console.log(markers[0].getPosition().lat());
-      toastr["info"]("setMarkersSeeker");
+      toastr["info"]("esta es la funcion de insertar los markers");
         return $http.post('/api/v1/seeker/', {
+          user_id : 1,
           start_lat : markers[0].getPosition().lat(),
           start_lng : markers[0].getPosition().lng(),
           end_lat : markers[1].getPosition().lat(),
-          end_lnt : markers[1].getPosition().lng()
+          end_lnt : markers[1].getPosition().lng(),
       }).then( toastr["info"]("yeeeeeeeeees")); 
     }
  

@@ -65,5 +65,9 @@ $ sudo make install
 $ cd ..
 
 
+POSTGRES CREATE EXTENSIONS
 
+$ psql -d pooling
+# create extension postgis
+# create extension postgis_topology
 

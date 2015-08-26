@@ -23,3 +23,15 @@ class WorldBorder(models.Model):
     # Returns the string representation of the model.
     def __str__(self):              # __unicode__ on Python 2
         return self.name
+
+class Zipcode(models.Model):
+    code = models.CharField(max_length=5)
+    poly = models.PolygonField()
+    objects = models.GeoManager()
+
+class SouthTexasCity(models.Model):
+    name = models.CharField(max_length=30)
+    # A projected coordinate system (only valid for South Texas!)
+    # is used, units are in meters.
+    point = models.PointField(srid=32140)
+    objects = models.GeoManager()

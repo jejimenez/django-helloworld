@@ -1,0 +1,4 @@
+django_GIS_test/
+dango-TESTS/
+googlemaps/
+*.pyc

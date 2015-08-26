@@ -44,8 +44,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
   * @desc Update xsrf $http headers to align with Django's defaults
   */
   function run($http) {
+    var csrftoken = Cookies.get('csrftoken');
     $http.defaults.xsrfHeaderName = 'X-CSRFToken';
-    $http.defaults.xsrfCookieName = 'csrftoken';
+    $http.defaults.xsrfCookieName = csrftoken;
   }
 
 })();

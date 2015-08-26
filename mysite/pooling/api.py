@@ -1,4 +1,5 @@
-from tastypie.resources import ModelResource
+#from tastypie.resources import ModelResource
+from tastypie.contrib.gis.resources import ModelResource
 from .models import Seeker
 from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization

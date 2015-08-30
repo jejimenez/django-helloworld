@@ -25,8 +25,9 @@ SECRET_KEY = '$7a)l^t2bw#kcw+(!jeb2-dqob%nyptvu1!f8^iqkh2#+p+l+1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+TASTYPIE_FULL_DEBUG = True
 
+ALLOWED_HOSTS = []
 
 # Application definition
 

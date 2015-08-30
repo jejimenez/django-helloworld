@@ -3,18 +3,22 @@ from rest_framework import serializers
 from authentication.models import Account
 
 class AccountSerializer(serializers.ModelSerializer):
+	#print("serializers")
 	password = serializers.CharField(write_only=True, required=False)
 	confirm_password =serializers.CharField(write_only=True, required=False)
 
 	class Meta:
+		#print("meta 1")
 		model = Account
 		fields = ('id', 'email', 'username', 'created_at', 'updated_at', 'first_name', 'last_name', 'tagline', 'password', 'confirm_password',)
 		read_only_fields=('created_at', 'updated_at')
 
 		def create(self, validated_data):
+			#print("create")
 			return Account.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
+			#print("update")
 			instance.username = validated_data.get('username', instance.username)
 			instance.tagline = validated_data.get('tagline', instance.tagline)
 

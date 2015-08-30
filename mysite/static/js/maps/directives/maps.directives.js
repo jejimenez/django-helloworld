@@ -147,6 +147,8 @@ angular.module('pooling.maps.directives', [])
                     if(callback)wf.onload=callback;
                     var s = document.getElementsByTagName('script')[0];
                     s.parentNode.insertBefore(wf, s);
+                    wf.onerror = function (message){toastr["error"]("No es posible acceder al elemento "+message.target.src); console.log(this)};
+                    
                 };
             }
         }

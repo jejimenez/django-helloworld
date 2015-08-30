@@ -18,6 +18,7 @@ from django.contrib import admin
 from tastypie.api import Api
 from pooling.api import SeekerResource
 from django.contrib.auth.decorators import login_required 
+from pooling.views import save
 
 
 v1_api = Api(api_name='v1')
@@ -25,6 +26,6 @@ v1_api.register(SeekerResource())
 
 urlpatterns = [
     url(r'^api/', include(v1_api.urls)),
-    #url(r'^job-form/$',login_required(JobFormView.as_view()),name='job_form'),
+    url(r'^save/','pooling.views.save',name='save'),
     #url(r'^job/$',login_required(JobView.as_view()),name='job'),
 ]

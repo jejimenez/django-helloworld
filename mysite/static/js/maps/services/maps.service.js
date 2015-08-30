@@ -34,7 +34,8 @@
       console.log(markers);
       console.log(markers[0].getPosition().lat());
       //toastr["info"]("esta es la funcion de insertar los markers");
-        return $http.post('/api/v1/seeker/', {
+      return $http.post('/api/v1/seeker/', {
+      //return $http.post('/save/', {
           user_id : 1,
           start_lat : markers[0].getPosition().lat(),
           start_lng : markers[0].getPosition().lng(),

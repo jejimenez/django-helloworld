@@ -1,4 +1,6 @@
 django_GIS_test/
 django-TESTS/
 googlemaps/
+django-api-rest-and-angular-master/
+DjangoRestApiDemo-master/
 *.pyc

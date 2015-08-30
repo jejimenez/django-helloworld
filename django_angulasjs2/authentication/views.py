@@ -37,15 +37,15 @@ class AccountViewSet(viewsets.ModelViewSet):
             'message': 'Account could not be created with received data.'
         }, status=status.HTTP_400_BAD_REQUEST)
 
-class LoginView(views.APIView):
-    def post(self, request, format=None):
-        data = json.loads(request.body)
 
+class LoginView(views.APIView):
+    #print("000000000")
+    def post(self, request, format=None):
+        data = json.loads((request.body).decode('utf-8')) #json.loads(request.body)
+        #data = json.loads('{"email":"ok@ok.com","password":"ok"}')
         email = data.get('email', None)
         password = data.get('password', None)
-
         account = authenticate(email=email, password=password)
-
         if account is not None:
             if account.is_active:
                 login(request, account)

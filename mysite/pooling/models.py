@@ -1,11 +1,12 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from authentication.models import Account
 #from django.db import models
 from django.contrib.gis.db import models
 
 # Create your models here.
 
 class Seeker(models.Model):
-    user = models.ForeignKey(User, verbose_name='Usuario Seeker', related_name='Usuario_Seeker')
+    user = models.ForeignKey(Account, verbose_name='Usuario Seeker', related_name='Usuario_Seeker')
     start_lat = models.DecimalField(max_digits=19, decimal_places=10,blank=True,null=True)
     start_lng = models.DecimalField(max_digits=19, decimal_places=10,blank=True,null=True)
     start_point = models.PointField()
@@ -17,7 +18,7 @@ class Seeker(models.Model):
     objects = models.GeoManager()
 
 class Driver(models.Model):
-    user = models.ForeignKey(User, verbose_name='Usuario_Driver', related_name='Usuario_Driver')
+    user = models.ForeignKey(Account, verbose_name='Usuario_Driver', related_name='Usuario_Driver')
     json_way = models.TextField('json_way', blank=False)
     schedule = models.CharField('schedule', max_length=7)
     description = models.TextField('description', blank=True,null=True)

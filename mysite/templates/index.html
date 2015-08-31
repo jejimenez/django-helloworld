@@ -56,7 +56,7 @@
         <button class="btn btn-info" data-ng-click='setDirections()'><i class="icon-search"></i>Get Directions</button>
     <main class="ui page grid">
         <div class="row">
-            <div class="column ng-view">
+            <div class="column ">
                 <div class="ui message main">
                     <h2>Hello, world!</h2>
                     <g-map idmap="map_canvas"></g-map>
@@ -64,6 +64,7 @@
             </div>
         </div>
     </main>
+    <div ng-view></div>
 
 </div>
   {% include 'javascripts.html' %}

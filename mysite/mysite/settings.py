@@ -29,6 +29,7 @@ TASTYPIE_FULL_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,9 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tastypie',
+    'rest_framework',
     'compressor',
     'mysite',
+    'authentication',
     'pooling',
 )
 
@@ -120,3 +122,13 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+AUTH_USER_MODEL = 'authentication.Account'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}

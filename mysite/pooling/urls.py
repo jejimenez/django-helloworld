@@ -15,17 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from tastypie.api import Api
-from pooling.api import SeekerResource
+#from tastypie.api import Api
+#from pooling.api import SeekerResource
 from django.contrib.auth.decorators import login_required 
-from pooling.views import save
+from pooling.views import save, IndexView
 
 
-v1_api = Api(api_name='v1')
-v1_api.register(SeekerResource())
+#v1_api = Api(api_name='v1')
+#v1_api.register(SeekerResource())
 
 urlpatterns = [
-    url(r'^api/', include(v1_api.urls)),
+#    url(r'^api/', include(v1_api.urls)),
     url(r'^save/','pooling.views.save',name='save'),
+    url('^.*$', IndexView.as_view(), name='index'),
     #url(r'^job/$',login_required(JobView.as_view()),name='job'),
 ]

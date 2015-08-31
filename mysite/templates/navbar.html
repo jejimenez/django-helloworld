@@ -1,7 +1,14 @@
+    <!--<nav class="ui fixed menu inverted navbar" role="navigation" ng-controller="NavbarController" >-->
     <nav class="ui fixed menu inverted navbar" role="navigation" >
         <a href="" class="brand item">Project Name</a>
         <a href="" class="active item">Home</a>
-        <a href="" class="item">About</a>
+        {% if user.is_authenticated %}
+        <a href="" class="item">{{ user.username }}</a>
+        <a href="javascript:void(0)" ng-click="vm.logout()" class="item">Logout</a>
+        {% else %}
+        <a href="/login" class="item">Login</a>
+        <a href="/register" class="item">Register</a>
+        {% endif %}
         <a href="" class="item">Contact</a>
         <a class="ui dropdown item">Dropdown
           <i class="dropdown icon"></i>

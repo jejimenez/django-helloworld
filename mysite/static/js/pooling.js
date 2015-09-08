@@ -5,7 +5,15 @@
   'use strict';
 
 //start page properties
+  //$('.ui.dropdown').dropdown();
+$(document).ready(function(){
+  $('.right.menu.open').on("click",function(e){
+        e.preventDefault();
+    $('.ui.vertical.menu').toggle();
+  });
+    
   $('.ui.dropdown').dropdown();
+});
 
 //
   angular
@@ -19,7 +27,7 @@
 
 
   angular
-    .module('pooling.routes', ['ngRoute']);
+    .module('pooling.routes', ['ui.router']);
   angular
     .module('pooling.config', []);
 
@@ -55,4 +63,20 @@ $.ajaxSetup({
     }
 });
 
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 })();

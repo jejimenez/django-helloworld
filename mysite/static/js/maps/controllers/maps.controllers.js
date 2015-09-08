@@ -39,6 +39,10 @@
     $scope.saveMarkersSeeker = function() {
       if(!$scope.gmap.markers || $scope.gmap.markers.length != 2){toastr['error']('Por favor seleccione los puntos de inicio y fin de la ruta deseada'); return null;}
         GoMaps.setMarkersSeeker($scope.gmap.markers);
-    }
+    };
+
+    $scope.showMessage = function (){
+      toastr['error']('::'+$('#map_canvas').length); return null;
+    };
   }
 })();

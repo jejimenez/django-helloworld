@@ -9,10 +9,10 @@ angular.module('pooling.maps.directives', [])
 .directive('gMap', gMapDirective);
 
 
-  gMapDirective.$inject = ['$window', '$parse'];
+  gMapDirective.$inject = ['$window', '$parse', '$timeout'];
 
 
-    function gMapDirective($window,$parse) {
+    function gMapDirective($window,$parse,$timeout) {
         var counter = 0,
         prefix = '__ep_gmap_',
         img_start_rt = 'http://maps.google.com/mapfiles/kml/paddle/go.png',
@@ -23,27 +23,22 @@ angular.module('pooling.maps.directives', [])
         msg_marker_added_end = 'Marcador agregado:Fin de ruta',
         strPlnTypeStart = 'start',
         strPlnTypeEnd = 'end';
-
-
-        return {
-            restrict: 'E',
-            replace: false,
-            controller: 'GoMapsController',
-            scope: {idmap: '@'},
-            templateUrl: 'static/templates/maps/gmap.html',
-            link: function (scope, element, attrs, controller) {
-                //scope.gmap.setDirections = function () {log("okkkkkkkkkkkkkkkk")};
-                //scope.gmap.options = ['Driving', 'Walking', 'Bicycling', 'Transit'];
+        
+        var link = function (scope, element, attrs, controller) {
+            //function called in timeout
+            function directive_function (scope, element, attrs, controller){
+                scope.$watch(attrs.gMap, function() {});
                 var model = scope.gmap;
+                var maps_arr = [];
                 if ($window.google && $window.google.maps) {
-                    gMapInit();
+                    gMapInit();  
                 } else {
-                    injectGoogle(function(){});
+                    maps_arr.push(injectGoogle());
                 };
                 function log(str){toastr["success"](str);}
                 function gMapInit() {
-                   //log('maps-API has been loaded, ready to use');
-                   var 
+                   var i=0;                   
+                    var 
                     directionsDisplay = new google.maps.DirectionsRenderer({
                         draggable: true
                     }),
@@ -52,14 +47,14 @@ angular.module('pooling.maps.directives', [])
                             zoom: 11,
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         },
-                    map = new google.maps.Map(document.getElementById(attrs.idmap),mapOptions),
                     markers = [];
+                    try{var map = new google.maps.Map(document.getElementById(attrs.idmap),mapOptions)}
+                    catch(err){console.log(err);return false;}
                     // add your fixed business marker
                     directionsDisplay.setMap(map);
                     google.maps.event.addListener(map, 'click', function(event) {
                        placeMarker(event.latLng);
                     });
-
                     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
                         log("Mapa cargado!");
                     });
@@ -81,24 +76,6 @@ angular.module('pooling.maps.directives', [])
                     * place the markers. Just two markers, start rout and end rout.
                     **/
                     function placeMarker(location) {
-                        //for inheritance
-                        /*function inherits(childCtor, parentCtor) {
-                           function tempCtor() {};
-                           tempCtor.prototype = parentCtor.prototype;
-                           childCtor.superClass_ = parentCtor.prototype;
-                           childCtor.prototype = new tempCtor();
-                           childCtor.prototype.constructor = childCtor;
-                        };
-                        //inherit from google.maps.Marker
-                        function google_maps_Marker_Seeker(domElem, options){
-                           google.maps.Marker.call(this, domElem, options);
-                           var pln_type = '';
-                           this.getPlnType = function(){ return pln_type };
-                           this.setPlnType = function(val){ this.pln_type = val };
-                        }
- 
-                        inherits(google_maps_Marker_Seeker, google.maps.Marker);*/
-                        // Object inherit google maps marker
                         function google_maps_Marker_Seeker(options) {
                             google.maps.Marker.call( this, options );
                             this.pln_type = options.pln_type;
@@ -148,11 +125,23 @@ angular.module('pooling.maps.directives', [])
                     var s = document.getElementsByTagName('script')[0];
                     s.parentNode.insertBefore(wf, s);
                     wf.onerror = function (message){toastr["error"]("No es posible acceder al elemento "+message.target.src); console.log(this)};
-                    
+                    return cbId;
                 };
-            }
-        }
+            };
+
+            $timeout(function(){directive_function (scope, element, attrs, controller)}, 0);
+        };
+        var rtrn = {
+            restrict: 'E',
+            replace: false,
+            controller: 'GoMapsController',
+            scope: {idmap: '@'},
+            templateUrl: 'static/templates/maps/gmap.html',
+            transclude: true,
+            link: link
+        };
+
+        return rtrn;
     }
 
 })();
-

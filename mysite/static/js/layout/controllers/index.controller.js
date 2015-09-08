@@ -15,7 +15,6 @@
   * @namespace IndexController
   */
   function IndexController($scope) {
-    alert("IndexController");
     var vm = this;
     $scope.message = 'Everyone come and see how good I look!';
 

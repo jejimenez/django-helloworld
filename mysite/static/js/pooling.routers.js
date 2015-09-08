@@ -4,13 +4,9 @@
   angular
     .module('pooling.routes')
     .config(config);
-
+/*
   config.$inject = ['$routeProvider'];
 
-  /**
-  * @name config
-  * @desc Define valid application routes
-  */
   function config($routeProvider) {
     $routeProvider.when('/register', {
       controller: 'RegisterController', 
@@ -23,7 +19,7 @@
     }).when('/admin', {
       templateUrl: '/admin'
     }).when('/', {
-      controller: 'IndexController',
+      controller: 'GoMapsController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/layout/index.html'
     }).when('/+:username', {
@@ -36,4 +32,32 @@
       templateUrl: '/static/templates/profiles/settings.html'
     }).otherwise('/');
   }
+  */
+  config.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+ function config($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/home');
+    
+    $stateProvider
+        
+        // HOME STATES AND NESTED VIEWS ========================================
+      .state('home', {
+        url: '/home',
+        templateUrl: '/static/templates/layout/index.html'
+      })
+        
+        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+        .state('login', {
+      controller: 'LoginController',
+      url: '/login',
+      templateUrl: '/static/templates/authentication/login.html'   
+        })
+        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+        .state('register', {
+      controller: 'RegisterController',
+      url: '/register',
+      templateUrl: '/static/templates/authentication/register.html' 
+        });
+      }
+        
 })();

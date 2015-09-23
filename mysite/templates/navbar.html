@@ -59,35 +59,8 @@
     </div>
 </div>  
 -->
-    <div class="ui grid">
-        <nav class="computer tablet only row">
-            <div class="ui inverted fixed menu navbar page grid" role="navigation" >
-                <a href="" class="brand item">CarPooling</a>
-                <a href="" ui-sref="home" class="active item">Home</a>
-                <a href="" class="item">About</a>
-                <a href="" class="item">Contact</a>
-                <a class="ui dropdown item">Dropdown
-                  <i class="dropdown icon"></i>
-                  <div class="menu">
-                    <div class="item">Action</div>
-                    <div class="item">Another action</div>
-                    <div class="item">Something else here</div>
-                    <div class="ui divider"></div>
-                    <div class="item">Seperated link</div>
-                    <div class="item">One more seperated link</div>
-                  </div>
-                </a>
-                <div class="right menu">
-                    {% if user.is_authenticated %}
-                    <a href="javascript:void(0)" ng-click="vm.logout()" class="item">Logout</a>
-                    {% else %}
-                    <a href="" ui-sref="login" class="item">Login</a>
-                    <a href="" ui-sref="register"  class="item">Register</a>
-                    {% endif %}
-                </div>
-            </div>
-        </nav>
-        <div class="mobile only row">
+    <div class="ui menu grid" role="navigation" ng-controller="NavbarController as vm">
+        <nav class="mobile tablet only row">
             <div class="ui fixed inverted navbar menu">
                 <a href="" class="brand item">CarPooling</a>
                 <div class="right menu open">
@@ -120,5 +93,32 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
+        </nav>
+        <nav class="computer only row">
+            <div class="ui inverted fixed menu navbar page grid" role="navigation" >
+                <a href="" class="brand item">CarPooling</a>
+                <a href="" ui-sref="home" class="active item">Home</a>
+                <a href="" class="item">About</a>
+                <a href="" class="item">Contact</a>
+                <a class="ui dropdown item">Dropdown
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    <div class="item">Action</div>
+                    <div class="item">Another action</div>
+                    <div class="item">Something else here</div>
+                    <div class="ui divider"></div>
+                    <div class="item">Seperated link</div>
+                    <div class="item">One more seperated link</div>
+                  </div>
+                </a>
+                <div class="right menu">
+                    {% if user.is_authenticated %}
+                    <a href="javascript:void(0)" ng-click="vm.logout()" class="item">Logout</a>
+                    {% else %}
+                    <a href="" ui-sref="login" class="item">Login</a>
+                    <a href="" ui-sref="register"  class="item">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
     </div>

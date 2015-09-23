@@ -3,18 +3,7 @@
 
 (function () {
   'use strict';
-
 //start page properties
-  //$('.ui.dropdown').dropdown();
-$(document).ready(function(){
-  $('.right.menu.open').on("click",function(e){
-        e.preventDefault();
-    $('.ui.vertical.menu').toggle();
-  });
-    
-  $('.ui.dropdown').dropdown();
-});
-
 //
   angular
     .module('pooling', [
@@ -26,10 +15,8 @@ $(document).ready(function(){
       ]);
 
 
-  angular
-    .module('pooling.routes', ['ui.router']);
-  angular
-    .module('pooling.config', []);
+  angular.module('pooling.routes', ['ui.router']);
+  angular.module('pooling.config', []);
 
 
   angular
@@ -50,33 +37,34 @@ $(document).ready(function(){
   }
 
   
-//set the header on your AJAX request, while protecting the CSRF token from being sent to other domains
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});
+  //set the header on your AJAX request, while protecting the CSRF token from being sent to other domains
+  function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+  }
+  $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+      }
+  });
+  //toastr messages config
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
 
-toastr.options = {
-  "closeButton": true,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-right",
-  "preventDuplicates": false,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
 })();

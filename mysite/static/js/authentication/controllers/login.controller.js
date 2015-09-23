@@ -16,6 +16,36 @@
   */
   function LoginController($location, $scope, Authentication) {
     var vm = this;
+    var registrationForm = $('.ui.form.login');
+
+    //semantic validation rules and parameters
+    (function ($) {
+    registrationForm.form({  
+        on: 'blur',
+        fields: {     
+          email: {
+            identifier: 'Email',
+            rules: [{
+              type: 'empty',
+              prompt: 'Por favor ingrese su correo electrónico'
+            },{
+              type: 'email',
+              prompt: 'Por favor ingrese un correo electrónico válido'
+            }]
+          },       
+          password: {
+            identifier: 'Password',
+            rules: [{
+              type: 'empty',
+              prompt: 'Por favor ingrese su contraseña'
+            },{
+              type: 'length[6]',
+              prompt: 'La contraseña debe tener al menos 6 caracteres'
+            }]
+          }
+        }
+      });
+    }(jQuery));
 
     vm.login = login;
 
@@ -39,7 +69,32 @@
     * @memberOf thinkster.authentication.controllers.LoginController
     */
     function login() {
-      Authentication.login(vm.email, vm.password);
+      if(!registrationForm.form('validate form')){
+        console.log("it's a pitty");
+        return;}
+      //var auth = Authentication.login(vm.login.email, vm.login.password);
+      var err;
+      Authentication.login(vm.login.email, vm.login.password)
+        .success(loginSuccessFn)
+        .error(loginErrFn);
+
+      function loginSuccessFn(data, status, headers, config) {
+        Authentication.setAuthenticatedAccount(data.data);
+        window.location = '/';
+      }
+      function loginErrFn(data, status, headers, config) {
+        console.log("error"+"+data.message");
+        registrationForm.form('set fieldname', { valid: false, message: 'username is taken' });//.form('add errors', [ "data.message" ]);
+        console.log("error"+data.message);
+        $('.ui.login.error').html('<ul class="list"><li>'+data.message+'</li></ul>');
+        $('.ui.login.error').show();
+      }
+
+      //console.log("login controller");
+      //console.log(auth);
+      //console.log($scope.myData);
+
+      //console.log("::::::::::");
     }
   }
 })();

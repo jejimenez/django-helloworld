@@ -22,8 +22,8 @@ from .views import IndexPoolingView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('pooling.urls')),
     url(r'^$',IndexPoolingView.as_view(),name='index'),
     url(r'^api/v1/auth/login/$', LoginView.as_view(), name='login'),
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^', include('pooling.urls')),
 ]

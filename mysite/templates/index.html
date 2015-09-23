@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <script type="text/javascript" src="{% static 'bower_components/modernizr/modernizr.js' %}"></script>
     <script type="text/javascript">
         WebFontConfig = {
@@ -17,23 +16,15 @@
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(wf, s);
         })();
-
-
     </script>
-
     <style type="text/css">
-        .wf-loading * {
-            opacity: 0;
-        }
-
+        .wf-loading * {opacity: 0;}
         .wf-loading {
             background: url("{% static 'img/ajax-loader.gif' %}") no-repeat center center;
             height: 100%;
             overflow: hidden;
         }
-
-        .wf-active *,
-        .wf-inactive * {
+        .wf-active *, .wf-inactive * {
         }
     </style>
   <title>pooling</title>
@@ -44,10 +35,8 @@
 </head>
 
 <body ng-app="pooling">
-<div class='content_wrapper'>  
+<div class='full_content_wrap'>  
   {% include 'navbar.html' %}
-<br>
-<br>
 <!--
     <p>Name: <input type="text" ng-model="name"></p>
     <p>{{name}}</p>
@@ -65,7 +54,7 @@
     </main>
 
 -->
-    <div ui-view></div>
+    <div class='content_wrap' ui-view></div>
   {% include 'javascripts.html' %}
 </div>
 </body>

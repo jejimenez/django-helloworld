@@ -18,11 +18,22 @@
     var vm = this;
     var registrationForm = $('.ui.form.login');
     var errorForm = $('.ui.login.error');
+    var val_result = false;
 
     //semantic validation rules and parameters
     (function ($) {
     registrationForm.form({  
         on: 'blur',
+        //--> hack to avoid the form submition
+        onSuccess: function () {
+          val_result = true;
+          return false;
+        },
+        onFailure: function () {
+          val_result = false;
+          return false;
+        },
+        //<-- hack to avoid the form submition
         fields: {     
           email: {
             identifier: 'Email',
@@ -47,6 +58,15 @@
         }
       });
     }(jQuery));
+/*
+    $('form').api({
+      url:'/',
+      onError: function () {
+        return false;
+      }
+    });
+
+  */  
 
     vm.login = login;
 
@@ -70,9 +90,10 @@
     * @memberOf thinkster.authentication.controllers.LoginController
     */
     function login() {
-      if(!registrationForm.form('validate form')){
-        console.log("it's a pitty");
-        return;}
+      registrationForm.form('validate form');
+      if(val_result === false){
+        return;
+      }
       //var auth = Authentication.login(vm.login.email, vm.login.password);
       var err;
       Authentication.login(vm.login.email, vm.login.password)
@@ -80,10 +101,12 @@
         .error(loginErrFn);
 
       function loginSuccessFn(data, status, headers, config) {
+        console.log("success");
         Authentication.setAuthenticatedAccount(data.data);
         window.location = '/';
       }
       function loginErrFn(data, status, headers, config) {
+        console.log("err");
         registrationForm.form('add errors', [ data.message ]);
         errorForm.show();
       }
@@ -93,6 +116,7 @@
       //console.log($scope.myData);
 
       //console.log("::::::::::");
+      return;
     }
   }
 })();

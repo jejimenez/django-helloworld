@@ -3,7 +3,7 @@
   <div class="ui one column center aligned grid">
     <div class="column six wide form-holder">
       <h2 class="center aligned header form-head">Sign in</h2>
-      <div class="ui form login" ng-controller="LoginController as vm">
+      <form class="ui form login" ng-controller="LoginController as vm"  >
         <div class="field">
         <div class="ui icon input">
           <input id="Email" type="text" ng-model="vm.login.email" placeholder="usuario (email@ejemplo.com)">
@@ -27,7 +27,7 @@
         </div>
 
       <div class="ui login error message"></div>
-      </div>
+      </form>
     </div>
   </div>
   <!--</form>-->

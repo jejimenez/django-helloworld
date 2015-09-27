@@ -42,7 +42,6 @@ class LoginView(views.APIView):
     print("000000000")
     def post(self, request, format=None):
         data = json.loads((request.body).decode('utf-8')) #json.loads(request.body)
-        #data = json.loads('{"email":"ok@ok.com","password":"ok"}')
         email = data.get('email', None)
         password = data.get('password', None)
         account = authenticate(email=email, password=password)

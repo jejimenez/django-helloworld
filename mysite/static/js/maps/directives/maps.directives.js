@@ -49,7 +49,7 @@ angular.module('pooling.maps.directives', [])
                         },
                     markers = [];
                     try{var map = new google.maps.Map(document.getElementById(attrs.idmap),mapOptions)}
-                    catch(err){console.log(err);return false;}
+                    catch(err){console.error(err);return false;}
                     // add your fixed business marker
                     directionsDisplay.setMap(map);
                     google.maps.event.addListener(map, 'click', function(event) {

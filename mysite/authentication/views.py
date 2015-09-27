@@ -41,15 +41,10 @@ class AccountViewSet(viewsets.ModelViewSet):
 class LoginView(views.APIView):
     print("000000000")
     def post(self, request, format=None):
-        print("111111111")
         data = json.loads((request.body).decode('utf-8')) #json.loads(request.body)
-        print("2222222222")
         #data = json.loads('{"email":"ok@ok.com","password":"ok"}')
-        print("33333333333")
         email = data.get('email', None)
-        print("444444444")
         password = data.get('password', None)
-        print("555555555")
         account = authenticate(email=email, password=password)
         if account is not None:
             if account.is_active:
@@ -61,12 +56,12 @@ class LoginView(views.APIView):
             else:
                 return Response({
                     'status': 'Unauthorized',
-                    'message': 'This account has been disabled.'
+                    'message': 'Esta cuenta ha sido deshabilitada.'
                 }, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response({
                 'status': 'Unauthorized',
-                'message': 'Username/password combination invalid.'
+                'message': 'Usuario/contraseña invalidas'
             }, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(views.APIView):

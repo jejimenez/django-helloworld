@@ -17,6 +17,7 @@
   function LoginController($location, $scope, Authentication) {
     var vm = this;
     var registrationForm = $('.ui.form.login');
+    var errorForm = $('.ui.login.error');
 
     //semantic validation rules and parameters
     (function ($) {
@@ -83,11 +84,8 @@
         window.location = '/';
       }
       function loginErrFn(data, status, headers, config) {
-        console.log("error"+"+data.message");
-        registrationForm.form('set fieldname', { valid: false, message: 'username is taken' });//.form('add errors', [ "data.message" ]);
-        console.log("error"+data.message);
-        $('.ui.login.error').html('<ul class="list"><li>'+data.message+'</li></ul>');
-        $('.ui.login.error').show();
+        registrationForm.form('add errors', [ data.message ]);
+        errorForm.show();
       }
 
       //console.log("login controller");

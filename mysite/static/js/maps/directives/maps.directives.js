@@ -44,7 +44,7 @@ angular.module('pooling.maps.directives', [])
                     }),
                     mapOptions = {
                             center: new google.maps.LatLng(model.Lat, model.Lon),
-                            zoom: 11,
+                            zoom: model.zoom,
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         },
                     markers = [];

@@ -1,8 +1,10 @@
 -------requirements:
 
 ---django-libraries
-pip install django-tastypie
+#pip install django-tastypie
 pip install django-compressor --django-compressor==1.4
+pip install djangorestframework
+pip install djangorestframework-gis
 
 
 
@@ -70,4 +72,7 @@ POSTGRES CREATE EXTENSIONS
 $ psql -d pooling
 # create extension postgis
 # create extension postgis_topology
+
+
+
 

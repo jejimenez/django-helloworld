@@ -39,7 +39,6 @@ class AccountViewSet(viewsets.ModelViewSet):
 
 
 class LoginView(views.APIView):
-    print("000000000")
     def post(self, request, format=None):
         data = json.loads((request.body).decode('utf-8')) #json.loads(request.body)
         email = data.get('email', None)
@@ -48,9 +47,7 @@ class LoginView(views.APIView):
         if account is not None:
             if account.is_active:
                 login(request, account)
-
                 serialized = AccountSerializer(account)
-
                 return Response(serialized.data)
             else:
                 return Response({

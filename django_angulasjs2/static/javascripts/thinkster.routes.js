@@ -1,4 +1,4 @@
-(function () {
+  (function () {
   'use strict';
 
   angular
@@ -19,7 +19,7 @@
     }).when('/login', {
       controller: 'LoginController',
       controllerAs: 'vm',
-      templateUrl: '/static/templates/authentication/login.html'
+      templateUrl: '/static/templates/authentication/login2.html'
     }).when('/admin', {
       templateUrl: '/admin'
     }).when('/', {

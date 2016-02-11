@@ -3,4 +3,5 @@ django-TESTS/
 googlemaps/
 django-api-rest-and-angular-master/
 DjangoRestApiDemo-master/
+mysite/
 *.pyc

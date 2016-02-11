@@ -25,7 +25,6 @@
     * @memberOf thinkster.posts.controllers.NewPostController
     */
     function submit() {
-      console.error('vamos a ver:'+Authentication.getAuthenticatedAccount().username);
       $rootScope.$broadcast('post.created', {
         content: vm.content,
         author: {
